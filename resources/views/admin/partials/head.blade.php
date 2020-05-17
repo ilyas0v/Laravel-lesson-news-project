@@ -33,4 +33,15 @@
     <!-- Main CSS-->
     <link href="{{ asset('dashboard/css/theme.css') }}" rel="stylesheet" media="all">
 
+
+    <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
+    
+
+    <style>
+        .modal-backdrop.show{
+            z-index:0 !important;
+        }
+    </style>
+
 </head>

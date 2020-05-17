@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\News;
 
 class NewsController extends Controller
 {
@@ -13,7 +14,8 @@ class NewsController extends Controller
      */
     public function index()
     {
-        return view('admin.news.index');
+        $news = News::all(); //  SELECT * FROM news;
+        return view('admin.news.index',  compact('news'));
     }
 
     /**
@@ -23,7 +25,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.news.create');
     }
 
     /**
@@ -34,7 +36,33 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        \App::setLocale('en');
+        $this->validate($request, [
+            'title'   => 'required|min:5|max:100',
+            'description'=> 'required|min:5|max:200',
+            'body' => 'required|min:10|max:50000',
+            'image' => 'image|mimes:jpg,jpeg,png,gif,svg|max:2000',
+            'status' => 'required|boolean'
+        ]);
+
+        $n = new News();
+        $n->title = $request->title;
+        $n->description = $request->description;
+        $n->body = $request->body;
+        $n->status = $request->status;
+
+
+        if($request->hasFile('image'))
+        {
+            $n->image = $request->image->hashName(); //  k24523545k3g524j3h4rf9w7e7.png
+            $request->image->storeAs('news', $n->image, 'public');
+        }
+
+        $n->save(); // INSERT INTO news(title, desc, body, status) values(....);
+
+        \Session::flash('success_message', 'Xəbər əlavə olundu');
+        return redirect()->route('news.index');
+
     }
 
     /**
@@ -45,7 +73,10 @@ class NewsController extends Controller
      */
     public function show($id)
     {
-        //
+        //  SELECT * FROM news WHERE id = $id;
+        $n = News::findOrFail($id);
+
+        return view('admin.news.show', compact('n'));
     }
 
     /**
@@ -56,7 +87,10 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-        //
+        // SELECT * FROM news WHERE id = $id
+        $n = News::findOrFail($id);
+
+        return view('admin.news.edit', compact('n'));
     }
 
     /**
@@ -68,7 +102,40 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title'   => 'required|min:5|max:100',
+            'description'=> 'required|min:5|max:200',
+            'body' => 'required|min:10|max:50000',
+            'image' => 'image|mimes:jpg,jpeg,png,gif,svg|max:2000',
+            'status' => 'required|boolean'
+        ]);
+
+        $n = News::findOrFail($id);
+        $n->title = $request->title;
+        $n->description = $request->description;
+        $n->body = $request->body;
+        $n->status = $request->status;
+
+
+        if($request->hasFile('image'))
+        {
+            $old_image = $n->image; //  kohne shekil
+
+            $n->image = $request->image->hashName(); //  k24523545k3g524j3h4rf9w7e7.png
+            $request->image->storeAs('news', $n->image, 'public');
+
+            if($old_image)
+                unlink(base_path() . '/storage/app/public/news/' . $old_image);
+        }
+
+        // unlink()
+
+
+        $n->save(); // INSERT INTO news(title, desc, body, status) values(....);
+
+        \Session::flash('success_message', 'Xəbər dəyişdirildi');
+
+        return redirect()->route('news.index');
     }
 
     /**
@@ -79,6 +146,15 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $n = News::findOrFail($id);  
+        $image = $n->image;
+        $n->delete();   //  DELETE FROM news WHERE id = $id
+
+        if($image)
+            unlink(base_path() . '/storage/app/public/news/' . $image);
+
+        \Session::flash('success_message', 'Xəbər silindi');
+
+        return redirect()->route('news.index');
     }
 }

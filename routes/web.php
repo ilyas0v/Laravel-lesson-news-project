@@ -11,6 +11,23 @@
 |
 */
 
-Route::get('/admin',  'DashboardController@index');
+Route::group(['prefix' => 'admin'], function(){
 
-Route::resource('/admin/news', 'NewsController');
+    Route::get('/',  'DashboardController@index');
+    Route::resource('/news', 'NewsController');
+
+});
+
+
+Route::get('/', function(){
+    return 'ANA SEHIFE';
+});
+
+
+
+
+// Route::get('/admin/news', 'NewsController@index');
+// Route::get('/admin/news/create', 'NewsController@create');
+
+
+// GET , POST,  PUT,  DELETE 

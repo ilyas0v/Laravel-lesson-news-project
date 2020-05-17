@@ -6,13 +6,8 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="overview-wrap">
-                                    <h2 class="title-1">NEWS</h2>
-                                </div>
-                            </div>
-                        </div>
+                        
+                        @include('admin.news.header')
 
                         <!-- TABLE -->
 
@@ -24,6 +19,7 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
+                                                <td>Image</td>
                                                 <th>Title</th>
                                                 <th>Description</th>
                                                 <th>Status</th>
@@ -33,17 +29,28 @@
                                         </thead>
                                         <tbody>
 
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Test test</td>
-                                                <td>Test test test test</td>
-                                                <td class="process">Active</td>
-                                                <td>12-03-2020</td>
-                                                <td>
-                                                    <a href="#" class="btn btn-primary">Edit</a>
-                                                    <a href="#" class="btn btn-danger">Delete</a>
-                                                </td>
-                                            </tr>
+                                            @foreach($news as $n)
+                                                <tr>
+                                                    <td>{{ $n->id }}</td>
+                                                    <td>
+                                                        <img src="/storage/news/{{ $n->image }}" alt="" width="200">
+                                                    </td>
+                                                    <td>{{ $n->title }}</td>
+                                                    <td>{{ $n->description }}</td>
+                                                    <td class="process">{{ $n->status }}</td>
+                                                    <td>{{ $n->created_at }}</td>
+                                                    <td>
+                                                        <a href="{{ route('news.show', $n->id) }}" class="btn btn-primary">Show</a>
+                                                        <a href="{{ route('news.edit', $n->id) }}" class="btn btn-secondary">Edit</a>
+
+                                                        <form action="{{ route('news.destroy', $n->id) }}" method="POST" onsubmit="return confirm('Silmek istediyinizden eminsinizmi?')">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <input type="submit" class="btn btn-danger" value="Delete">
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         
                                         </tbody>
                                     </table>

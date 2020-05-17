@@ -14,7 +14,7 @@
                         </li>
 
                         <li>
-                            <a href="">
+                            <a href="{{ route('news.index') }}">
                                 <i class="fas fa-newspaper"></i>News</a>
                         </li>
 
