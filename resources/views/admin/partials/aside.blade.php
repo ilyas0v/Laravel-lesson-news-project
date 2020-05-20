@@ -19,6 +19,11 @@
                         </li>
 
 
+                        <li>
+                            <a href="{{ route('news_category.index') }}">
+                                <i class="fas fa-newspaper"></i>News categories</a>
+                        </li>
+
                     </ul>
                 </nav>
             </div>

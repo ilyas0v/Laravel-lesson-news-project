@@ -11,10 +11,11 @@
 |
 */
 
-Route::group(['prefix' => 'admin'], function(){
+Route::group(['prefix' => 'admin' , 'middleware' => 'auth'], function(){
 
     Route::get('/',  'DashboardController@index');
-    Route::resource('/news', 'NewsController');
+    Route::resource('/news',          'NewsController');
+    Route::resource('/news_category', 'NewsCategoryController');
 
 });
 
@@ -30,4 +31,6 @@ Route::get('/', function(){
 // Route::get('/admin/news/create', 'NewsController@create');
 
 
-// GET , POST,  PUT,  DELETE 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

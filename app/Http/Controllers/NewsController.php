@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\News;
+use App\NewsCategory;
 
 class NewsController extends Controller
 {
@@ -25,7 +26,8 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return view('admin.news.create');
+        $categories = NewsCategory::all();
+        return view('admin.news.create', compact('categories'));
     }
 
     /**
@@ -36,8 +38,8 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        \App::setLocale('en');
         $this->validate($request, [
+            'category_id' => 'integer|exists:news_categories,id|nullable',
             'title'   => 'required|min:5|max:100',
             'description'=> 'required|min:5|max:200',
             'body' => 'required|min:10|max:50000',
@@ -50,6 +52,7 @@ class NewsController extends Controller
         $n->description = $request->description;
         $n->body = $request->body;
         $n->status = $request->status;
+        $n->category_id = $request->category_id;
 
 
         if($request->hasFile('image'))

@@ -32,6 +32,25 @@
                                         <div class="card-body card-block">
                                             <form action="{{ route('news.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
                                                 @csrf
+
+
+                                                 <div class="row form-group">
+                                                    <div class="col col-md-3">
+                                                        <label for="select" class=" form-control-label">Category</label>
+                                                    </div>
+                                                    <div class="col-12 col-md-9">
+                                                        <select name="category_id" id="select" class="form-control">
+                                                            <option value="">Please select</option>
+                                                            @foreach($categories as $category)
+                                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+
+
+
                                                 <div class="row form-group">
                                                     <div class="col col-md-3">
                                                         <label for="text-input" class=" form-control-label">Title</label>
@@ -70,23 +89,6 @@
                                                        <input type="file" name="image">
                                                     </div>
                                                 </div>
-
-
-
-
-                                                <!-- <div class="row form-group">
-                                                    <div class="col col-md-3">
-                                                        <label for="select" class=" form-control-label">Select</label>
-                                                    </div>
-                                                    <div class="col-12 col-md-9">
-                                                        <select name="select" id="select" class="form-control">
-                                                            <option value="0">Please select</option>
-                                                            <option value="1">Option #1</option>
-                                                            <option value="2">Option #2</option>
-                                                            <option value="3">Option #3</option>
-                                                        </select>
-                                                    </div>
-                                                </div> -->
 
                                                 
                                                

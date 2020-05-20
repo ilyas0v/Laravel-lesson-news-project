@@ -6,7 +6,7 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
 
-                        @include('admin.news.header')
+                        @include('admin.news_category.header')
 
                         <!-- FORM -->
 
@@ -30,16 +30,16 @@
                                             </div>
                                         </div>
                                         <div class="card-body card-block">
-                                            <form action="{{ route('news.update', $n->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                            <form action="{{ route('news_category.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
                                                 @csrf
-                                                @method('PUT')
+
 
                                                 <div class="row form-group">
                                                     <div class="col col-md-3">
-                                                        <label for="select" class=" form-control-label">Category</label>
+                                                        <label for="select" class=" form-control-label">Parent category</label>
                                                     </div>
                                                     <div class="col-12 col-md-9">
-                                                        <select name="category_id" id="select" class="form-control">
+                                                        <select name="parent_id" id="select" class="form-control">
                                                             <option value="">Please select</option>
                                                             @foreach($categories as $category)
                                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -49,61 +49,15 @@
                                                 </div>
 
 
-                                                
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3">
-                                                        <label for="text-input" class=" form-control-label">Title</label>
-                                                    </div>
-                                                    <div class="col-12 col-md-9">
-                                                        <input type="text" id="text-input" name="title" value="{{ $n->title }}" class="form-control">
-                                                    </div>
-                                                </div>
 
                                                 <div class="row form-group">
                                                     <div class="col col-md-3">
-                                                        <label for="textarea-input" class=" form-control-label">Description</label>
+                                                        <label for="text-input" class=" form-control-label">Name</label>
                                                     </div>
                                                     <div class="col-12 col-md-9">
-                                                        <textarea name="description" id="textarea-input" rows="4" placeholder="" class="form-control">{{ $n->description }}</textarea>
+                                                        <input type="text" id="text-input" name="name" placeholder="" class="form-control">
                                                     </div>
                                                 </div>
-
-
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3">
-                                                        <label for="textarea-input" class=" form-control-label">Body</label>
-                                                    </div>
-                                                    <div class="col-12 col-md-9">
-                                                        <textarea name="body" id="news_body" rows="30" placeholder="" class="form-control">{{ $n->body }}</textarea>
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div class="row form-group">
-                                                    <div class="col col-md-3">
-                                                        <label for="textarea-input" class=" form-control-label">Image</label>
-                                                    </div>
-                                                    <div class="col-12 col-md-9">
-                                                       <input type="file" name="image">
-                                                       <img src="/storage/news/{{ $n->image }}" alt="">
-                                                    </div>
-                                                </div>
-
-                                                <!-- <div class="row form-group">
-                                                    <div class="col col-md-3">
-                                                        <label for="select" class=" form-control-label">Select</label>
-                                                    </div>
-                                                    <div class="col-12 col-md-9">
-                                                        <select name="select" id="select" class="form-control">
-                                                            <option value="0">Please select</option>
-                                                            <option value="1">Option #1</option>
-                                                            <option value="2">Option #2</option>
-                                                            <option value="3">Option #3</option>
-                                                        </select>
-                                                    </div>
-                                                </div> -->
-
                                                 
                                                
                                                
@@ -115,15 +69,25 @@
                                                         <div class="form-check">
                                                             <div class="radio">
                                                                 <label for="radio1" class="form-check-label ">
-                                                                    <input type="radio" id="radio1" name="status" value="1" class="form-check-input" @if($n->status == 1) checked @endif>Active
+                                                                    <input type="radio" id="radio1" name="status" value="1" class="form-check-input">Active
                                                                 </label>
                                                             </div>
                                                             <div class="radio">
                                                                 <label for="radio2" class="form-check-label ">
-                                                                    <input type="radio" id="radio2" name="status" value="0" class="form-check-input" @if($n->status == 0) checked @endif>Deactive
+                                                                    <input type="radio" id="radio2" name="status" value="0" class="form-check-input">Deactive
                                                                 </label>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="row form-group">
+                                                    <div class="col col-md-3">
+                                                        <label for="text-input" class=" form-control-label">Order</label>
+                                                    </div>
+                                                    <div class="col-12 col-md-9">
+                                                        <input type="number" id="text-input" name="order" placeholder="" class="form-control">
                                                     </div>
                                                 </div>
 
@@ -152,4 +116,5 @@
                     </div>
                 </div>
             </div>
+
 @endsection
