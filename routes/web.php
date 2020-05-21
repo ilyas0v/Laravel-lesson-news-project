@@ -20,9 +20,9 @@ Route::group(['prefix' => 'admin' , 'middleware' => 'auth'], function(){
 });
 
 
-Route::get('/', function(){
-    return 'ANA SEHIFE';
-});
+Route::get('/',    'Frontend\PageController@home')->name('front.home');
+
+Route::get('/news/{id}',    'Frontend\PageController@news_detail')->name('front.news.detail');
 
 
 
@@ -31,6 +31,9 @@ Route::get('/', function(){
 // Route::get('/admin/news/create', 'NewsController@create');
 
 
-Auth::routes();
+//Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout',   'Auth\LoginController@logout')->name('logout');
+

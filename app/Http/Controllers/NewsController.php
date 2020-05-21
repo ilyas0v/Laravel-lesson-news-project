@@ -92,8 +92,8 @@ class NewsController extends Controller
     {
         // SELECT * FROM news WHERE id = $id
         $n = News::findOrFail($id);
-
-        return view('admin.news.edit', compact('n'));
+        $categories = NewsCategory::all();
+        return view('admin.news.edit', compact('n', 'categories'));
     }
 
     /**
