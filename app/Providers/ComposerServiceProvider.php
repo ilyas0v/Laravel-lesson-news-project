@@ -19,7 +19,12 @@ class ComposerServiceProvider extends ServiceProvider
     
         View::composer('front.partials.header', function($view) {
 
-            $view->with('categories', \App\NewsCategory::all());
+            $categories  = \App\NewsCategory::where('parent_id', NULL)
+                                            ->active()
+                                            ->ordering()
+                                            ->get();
+
+            $view->with('categories', $categories);
         });
     
     }

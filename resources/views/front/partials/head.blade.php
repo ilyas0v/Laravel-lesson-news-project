@@ -17,6 +17,17 @@
 	
 		
 	<link href="{{ asset('front/common/styles.css') }}" rel="stylesheet">
+
+
+	<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script>
+  window.OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "e5fa1cff-63e9-49ca-b964-eddaba7001da",
+    });
+  });
+</script>
 	
 	
 </head>

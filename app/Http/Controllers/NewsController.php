@@ -63,6 +63,29 @@ class NewsController extends Controller
 
         $n->save(); // INSERT INTO news(title, desc, body, status) values(....);
 
+
+
+        if($request->hasFile('images')){
+
+            foreach($request->images as $image)
+            {
+                $n->addMedia($image)
+                   ->setFileName(\Str::random(10).'-'.$image->getClientOriginalName())
+                   ->usingFileName(\Str::random(10).'-'.$image->getClientOriginalName())
+                   ->toMediaCollection('images');
+            }
+        }
+
+
+        \OneSignal::sendNotificationToAll(
+            $n->title, 
+            $url = route('front.news.detail', $n->id),
+            $data = null, 
+            $buttons = null, 
+            $schedule = null
+        );
+
+
         \Session::flash('success_message', 'Xəbər əlavə olundu');
         return redirect()->route('news.index');
 
@@ -135,6 +158,21 @@ class NewsController extends Controller
 
 
         $n->save(); // INSERT INTO news(title, desc, body, status) values(....);
+
+
+
+        if($request->hasFile('images')){
+
+            foreach($request->images as $image)
+            {
+                $n->addMedia($image)
+                   ->setFileName(\Str::random(10).'-'.$image->getClientOriginalName())
+                   ->usingFileName(\Str::random(10).'-'.$image->getClientOriginalName())
+                   ->toMediaCollection('images');
+            }
+        }
+
+        
 
         \Session::flash('success_message', 'Xəbər dəyişdirildi');
 

@@ -14,7 +14,7 @@
                                 <h4>{{ $n->title }}</h4>
                                 <p class="card-text">{{ $n->description }}</p>
                                 <p style="font-size:13px;font-weight:bold;">{{ $n->category ? $n->category->name : '' }}</p>
-                                <p style="font-size:10px;float:right;">{{ $n->created_at }}</p>
+                                <p style="font-size:10px;float:right;">{{ $n->created_at->format('d M, Y') }}</p>
                             </div>
                         </div>
                     </a>

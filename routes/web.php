@@ -22,9 +22,11 @@ Route::group(['prefix' => 'admin' , 'middleware' => 'auth'], function(){
 
 Route::get('/',    'Frontend\PageController@home')->name('front.home');
 
-Route::get('/news/{id}',    'Frontend\PageController@news_detail')->name('front.news.detail');
+Route::get('/news/{id}',            'Frontend\PageController@news_detail')->name('front.news.detail');
 
+Route::post('/news/{id}/comment',   'Frontend\PageController@add_comment')->name('front.comment.add');
 
+Route::get('/search',               'Frontend\PageController@search')->name('front.search');
 
 
 // Route::get('/admin/news', 'NewsController@index');

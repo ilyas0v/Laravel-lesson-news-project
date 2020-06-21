@@ -63,8 +63,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 					<li><a href="#">Contact us</a></li>
 				</ul>
 				<ul class="float-right float-sm-none list-a-plr-10 list-a-plr-sm-5 list-a-ptb-15 list-a-ptb-sm-5">
-					<li><a class="pl-0 pl-sm-10" href="#"><i class="ion-social-facebook"></i></a></li>
-					<li><a href="#"><i class="ion-social-twitter"></i></a></li>
+					<li><a class="pl-0 pl-sm-10" href="{{ setting('facebook') }}"><i class="ion-social-facebook"></i></a></li>
+					<li><a href="{{ setting('twitter') }}"><i class="ion-social-twitter"></i></a></li>
 					<li><a href="#"><i class="ion-social-google"></i></a></li>
 					<li><a href="#"><i class="ion-social-instagram"></i></a></li>
 					<li><a href="#"><i class="ion-social-bitcoin"></i></a></li>

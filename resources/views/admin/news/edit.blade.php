@@ -90,6 +90,26 @@
                                                     </div>
                                                 </div>
 
+
+                                                <div class="row form-group">
+                                                    <div class="col col-md-3">
+                                                        <label for="textarea-input" class=" form-control-label">Gallery</label>
+                                                    </div>
+                                                    <div class="col-12 col-md-9">
+                                                       <input type="file" name="images[]" multiple>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        @if($images = $n->getMedia('images'))
+                                                            @foreach($images as $image)
+                                                                <img src="{{ $image->getUrl()}}" style="display:inline-block;margin:20px;">
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+                                                </div>
+
                                                 <!-- <div class="row form-group">
                                                     <div class="col col-md-3">
                                                         <label for="select" class=" form-control-label">Select</label>
