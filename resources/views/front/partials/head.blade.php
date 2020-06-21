@@ -25,6 +25,10 @@
   OneSignal.push(function() {
     OneSignal.init({
       appId: "e5fa1cff-63e9-49ca-b964-eddaba7001da",
+      notifyButton: {
+        enable: true,
+      },
+      subdomainName: "xeberler999",
     });
   });
 </script>
