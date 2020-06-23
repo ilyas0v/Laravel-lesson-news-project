@@ -175,7 +175,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
-        Berkayk\OneSignal\OneSignalServiceProvider::class
+        Berkayk\OneSignal\OneSignalServiceProvider::class,
+        Anam\Captcha\ServiceProvider\CaptchaServiceProvider::class
 
     ],
 
@@ -227,7 +228,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Str' => Illuminate\Support\Str::class,
-        'OneSignal' => Berkayk\OneSignal\OneSignalFacade::class
+        'OneSignal' => Berkayk\OneSignal\OneSignalFacade::class,
+        'Captcha' => Anam\Captcha\Facade\Captcha::class,
 
     ],
 

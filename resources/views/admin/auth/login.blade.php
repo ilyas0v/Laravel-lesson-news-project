@@ -46,6 +46,17 @@
                                 <img src="images/icon/logo.png" alt="CoolAdmin">
                             </a>
                         </div>
+
+                        @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+
                         <div class="login-form">
                             <form action="{{ route('login') }}" method="post">
                                 @csrf
@@ -57,6 +68,9 @@
                                     <label>Password</label>
                                     <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
                                 </div>
+
+                                @captcha()
+
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
 
                             </form>
